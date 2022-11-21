@@ -1,46 +1,47 @@
 @props(['activePage'=>'dashboard'])
 
-<div class="sidebar fixed top-0 left-0 w-64 bg-gray-900 h-full flex flex-col gap-3 px-3 py-6 ">
-    <div class="identity text-white h-24 flex justify-center items-center font-bold text-2xl flex-col">
-        Lorem Ipsum
+<div class="sidebar fixed top-0 left-0 w-64 bg-light-dark dark:bg-dark h-full flex flex-col gap-3 px-3 py-6 2xl:w-80 2xl:px-4 2xl:py-8 2xl:gap-6">
+    <div class="identity text-white h-24 flex  justify-center items-center font-bold text-2xl 2xl:gap-3 gap-2 2xl:text-3xl">
+        <x-mysvg name="help"/>
+        <span>Benings</span>
     </div>
-    <div class="navigation text-white flex flex-col justify-between h-full">
-        <div class="navigation-component flex flex-col gap-2">
-            <div class="navElement group flex gap-3 h-12 p-4 rounded-xl hover:bg-black/30 items-center cursor-pointer {{ $activePage === 'dashboard' ? "bg-black/40" : "" }}" id="dashboard"> 
+    <div class="navigation text-white flex flex-col justify-between h-full ">
+        <div class="navigation-component flex flex-col gap-2 2xl:gap-3">
+            <div class="navElement group flex gap-3 h-12 p-4 2xl:gap-4  rounded-xl hover:bg-dark items-center cursor-pointer {{ $activePage === 'dashboard' ? "bg-black/40" : "" }}" id="dashboard"> 
                 {{-- icon --}}
                 <div class="w-4 h-4 flex justify-center items-center  group-hover:opacity-100 {{ $activePage === 'dashboard' ? "opacity-100" : "opacity-50" }}">
-                    <x-mysvg name="home"/>
+                    <x-mysvg name="home" />
                 </div>
-                <p class=" group-hover:text-white/100 {{ $activePage === 'dashboard' ? "text-white/100" : "text-white/50" }}">
+                <p class=" 2xl:text-lg group-hover:text-white/100 {{ $activePage === 'dashboard' ? "text-white/100 	" : "text-white/50" }}">
                     Dashboard
                 </p>
             </div>
-            <div class="navElement group flex gap-3 h-12 p-4 rounded-xl hover:bg-black/30  items-center cursor-pointer {{ $activePage === 'users' ? "bg-black/40" : "" }}" id="users">
+            <div class="navElement group flex gap-3 2xl:gap-4 h-12 p-4 rounded-xl hover:bg-black/30  items-center cursor-pointer {{ $activePage === 'users' ? "bg-black/40" : "" }}" id="users">
                 {{-- icon --}}
                 <div class="w-4 h-4 flex justify-center items-center group-hover:opacity-100 {{ $activePage === 'users' ? "opacity-100" : "opacity-50" }}">
                     <x-mysvg name="user"/>
                 </div>
-                <p class=" group-hover:text-white/100 {{ $activePage === 'users' ? "text-white/100" : "text-white/50" }}">
+                <p class="2xl:text-lg group-hover:text-white/100 {{ $activePage === 'users' ? "text-white/100" : "text-white/50" }}">
                     Users
                 </p>
             </div>
-            <div class="navElement group flex gap-3 h-12 p-4 rounded-xl hover:bg-black/30   items-center cursor-pointer {{ $activePage === 'coupons' ? "bg-black/40 " : "" }}" id="coupons">
+            <div class="navElement group flex gap-3 2xl:gap-4 h-12 p-4 rounded-xl hover:bg-black/30   items-center cursor-pointer {{ $activePage === 'coupons' ? "bg-black/40 " : "" }}" id="coupons">
                 {{-- icon --}}
                 <div class="w-4 h-4 flex justify-center items-center group-hover:opacity-100 {{ $activePage === 'coupons' ? "opacity-100 " : "opacity-50" }}">
                     <x-mysvg name="voucher"/>
                 </div>
-                <p class=" group-hover:text-white/100 {{ $activePage === 'coupons' ? "text-white/100 " : "text-white/50" }}">
+                <p class="2xl:text-lg group-hover:text-white/100 {{ $activePage === 'coupons' ? "text-white/100 " : "text-white/50" }}">
                     Coupons
                 </p>
             </div>
         </div>
         <div class="navigation-action">
-            <div class="navElement group flex gap-3 h-12 p-4 rounded-xl hover:bg-black/40 bg-black/20  items-center cursor-pointer" id=''>
+            <div class="navElement group flex gap-3 2xl:gap-4 h-12 p-4 rounded-xl hover:bg-black/40 bg-black/20  items-center cursor-pointer" id=''>
                 {{-- icon --}}
                 <div class="w-4 h-4 flex justify-center items-center opacity-100 group:opacity-100">
                     <x-mysvg name="logout" />
                 </div>
-                <p class="text-white/100 group-hover:text-white/100">
+                <p class="2xl:text-lg text-white/100 group-hover:text-white/100">
                     Log Out
                 </p>
             </div>

@@ -6,11 +6,11 @@
     $currYear = $dateSplitted[2];
 ?>
 
-<header class="h-12 flex justify-end items-center border-b-2 px-3 bg-gray-100">
-    <div class="header-component flex">
-        <div class="utility pr-4 flex gap-3 items-center">
+<header class="h-12 flex justify-end items-center border-b-2 px-3 bg-gray-100 dark:bg-light-dark dark:border-dark 2xl:h-14">
+    <div class="header-component flex ">
+        <div class="utility pr-4 flex gap-5 items-center dark:text-white 2xl:gap-6">
             {{-- Night Mode --}}
-            <button class="flex items-center">
+            <button class="flex items-center" id="dark-mode-toggle">
                 <x-mysvg name="dark-mode" />
             </button>
             <button class="flex items-center">
@@ -19,7 +19,7 @@
 
             {{-- Notifikasi --}}
         </div>
-        <div class="times flex gap-3 border-l pl-4 border-black/30 items-center">
+        <div class="times flex gap-4 border-l pl-5 border-black/30 items-center dark:text-white dark:border-white 2xl:gap-6">
             {{-- icon calendar --}}
             <x-mysvg name="today" />
             <p class="date-time">
@@ -28,3 +28,16 @@
         </div>
     </div>
 </header>
+<script>
+    const toggleBtn = document.getElementById('dark-mode-toggle')
+    var htmlElement = document.querySelector("html")
+    toggleBtn.addEventListener('click',() => {
+        if (htmlElement.classList.contains('dark')){
+            htmlElement.classList.remove('dark')
+        }
+        else {
+            htmlElement.classList.add('dark')
+        }
+    })
+
+</script>

@@ -26,8 +26,8 @@
     <span class="material-icons-outlined scale-75">edit</span>
 @elseif($name === "add")
     <span class="material-icons-outlined scale-75">add_circle_outline</span>
-@elseif($name === "")
-    <span class="material-icons-outlined "></span>
+@elseif($name === "help")
+    <span class="material-icons-outlined scale-110 2xl:scale-150">help_outline</span>
 @elseif($name === "")
     <span class="material-icons-outlined "></span>
 @elseif($name === "")
