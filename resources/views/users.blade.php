@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    @vite(['resources/css/app.css','resources/js/app.js'])
+    @vite(['resources/css/app.css','resources/js/app.js','resources/js/users.js','resources/js/header.js'])
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">   
 </head>
 <body>
@@ -62,56 +62,5 @@
     @include('modal.delete-user')
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready( function () {
-            $('#usersTable').DataTable();
-            $('.openModalAdd').on('click', function(e){
-                $('#add-user-modal').removeClass('hidden');
-            });
-            $('#deleteUser').on('click', function(e){
-                $('#delete-user-modal').removeClass('hidden');
-            });
-            $('.closeModal').on('click', function(e){
-                $('#add-user-modal').addClass('hidden');
-            });
-            $('.closeModal').on('click', function(e){
-                $('#delete-user-modal').addClass('hidden');
-            });
-        } );
-        function getDataByID(id) {
-            // get data from database
-            
-            const data = {
-                name:"as",
-                username:"as",
-                password:"as",
-                email:"as",
-            }
-            //dummy data ^^
-            return data 
-        }
-        document.getElementById('dark-mode-toggle').addEventListener('click',() => {
-            if (document.documentElement.classList.contains('dark')){
-                document.getElementById('usersTable_wrapper').classList.add('text-white')
-            }else {
-                document.getElementById('usersTable_wrapper').classList.remove('text-white')
-            }
-        })
-
-        function editUser(id) {
-            document.querySelector('#add-user-modal').classList.remove('hidden');
-            let data = getDataByID(id); // get data from database
-            
-            // manipulating input value
-            document.getElementById("name").value = data.name;
-            document.getElementById("username").value = data.username;
-            document.getElementById("password").disabled = true;
-            document.getElementById("email").value = data.email;
-            document.getElementById("submitUser").innerHTML = "Edit User";
-        }
-        function removeCoupon(id){
-            // remove coupon from database
-        }
-    </script> 
 </body>
 </html>

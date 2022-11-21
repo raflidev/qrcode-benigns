@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js','resources/js/coupons.js','resources/js/header.js'])
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">   
 </head>
 <body>
@@ -27,7 +27,7 @@
                 <span>Add Coupon</span>    
             </button>
         </div>
-        <table id="usersTable" class="dark:bg-light-dark dark:text-white">
+        <table id="couponsTable" class="dark:bg-light-dark dark:text-white">
             <thead class="">
                 <tr class="">
                     <th class="w-4" >ID</th>
@@ -63,58 +63,5 @@
     @include ('modal.delete-coupon')
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready( function () {
-            $('#usersTable').DataTable();
-            $('.openModalAdd').on('click', function(e){
-                $('#add-coupon-modal').removeClass('hidden');
-            });
-            $('#deleteCoupon').on('click', function(e){
-                $('#delete-coupon-modal').removeClass('hidden');
-            });
-            $('.closeModal').on('click', function(e){
-                $('#add-coupon-modal').addClass('hidden');
-            });
-            $('.closeModal').on('click', function(e){
-                $('#delete-coupon-modal').addClass('hidden');
-            });
-           
-        } );
-
-        
-        
-        function getDataByID(id) {
-            // get data from database
-            
-            const data = {
-                benefit :"a",
-                kode_unik :"b",
-                max_use :"c"
-            }
-            //dummy data ^^
-            return data 
-        }
-        document.getElementById('dark-mode-toggle').addEventListener('click',() => {
-            if (document.documentElement.classList.contains('dark')){
-                document.getElementById('usersTable_wrapper').classList.add('text-white')
-            }else {
-                document.getElementById('usersTable_wrapper').classList.remove('text-white')
-            }
-        })
-        function editCoupon(id) {
-            document.querySelector('#add-coupon-modal').classList.remove('hidden');
-            let data = getDataByID(id); // get data from database
-            
-            // manipulating input value
-            document.getElementById("benefit").value = data.benefit;
-            document.getElementById("kode_unik").value = data.kode_unik;
-            document.getElementById("max_use").value = data.max_use;
-            document.getElementById("submitCoupon").innerHTML = "Edit Coupon"
-        }
-        function removeCoupon(id){
-            // remove coupon from database
-        }
-
-    </script>
 </body>
 </html>
