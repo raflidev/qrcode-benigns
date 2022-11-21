@@ -9,7 +9,7 @@
             <div class="navElement group flex gap-3 h-12 p-4 rounded-xl hover:bg-black/30 items-center cursor-pointer {{ $activePage === 'dashboard' ? "bg-black/40" : "" }}" id="dashboard"> 
                 {{-- icon --}}
                 <div class="w-4 h-4 flex justify-center items-center  group-hover:opacity-100 {{ $activePage === 'dashboard' ? "opacity-100" : "opacity-50" }}">
-                    <x-mysvg />
+                    <x-mysvg name="home"/>
                 </div>
                 <p class=" group-hover:text-white/100 {{ $activePage === 'dashboard' ? "text-white/100" : "text-white/50" }}">
                     Dashboard
@@ -18,7 +18,7 @@
             <div class="navElement group flex gap-3 h-12 p-4 rounded-xl hover:bg-black/30  items-center cursor-pointer {{ $activePage === 'users' ? "bg-black/40" : "" }}" id="users">
                 {{-- icon --}}
                 <div class="w-4 h-4 flex justify-center items-center group-hover:opacity-100 {{ $activePage === 'users' ? "opacity-100" : "opacity-50" }}">
-                    <x-mysvg />
+                    <x-mysvg name="user"/>
                 </div>
                 <p class=" group-hover:text-white/100 {{ $activePage === 'users' ? "text-white/100" : "text-white/50" }}">
                     Users
@@ -27,7 +27,7 @@
             <div class="navElement group flex gap-3 h-12 p-4 rounded-xl hover:bg-black/30   items-center cursor-pointer {{ $activePage === 'coupons' ? "bg-black/40 " : "" }}" id="coupons">
                 {{-- icon --}}
                 <div class="w-4 h-4 flex justify-center items-center group-hover:opacity-100 {{ $activePage === 'coupons' ? "opacity-100 " : "opacity-50" }}">
-                    <x-mysvg />
+                    <x-mysvg name="voucher"/>
                 </div>
                 <p class=" group-hover:text-white/100 {{ $activePage === 'coupons' ? "text-white/100 " : "text-white/50" }}">
                     Coupons
@@ -38,7 +38,7 @@
             <div class="navElement group flex gap-3 h-12 p-4 rounded-xl hover:bg-black/40 bg-black/20  items-center cursor-pointer" id=''>
                 {{-- icon --}}
                 <div class="w-4 h-4 flex justify-center items-center opacity-100 group:opacity-100">
-                    <x-mysvg />
+                    <x-mysvg name="logout" />
                 </div>
                 <p class="text-white/100 group-hover:text-white/100">
                     Log Out
