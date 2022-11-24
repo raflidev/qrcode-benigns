@@ -1,8 +1,3 @@
-@php
-    $path_file = storage_path() . '/app/public/users.json';
-    $json = json_decode(file_get_contents($path_file), true);
-@endphp
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     @vite(['resources/css/app.css','resources/js/app.js','resources/js/users.js','resources/js/header.js'])
-    <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">   
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 </head>
 <body>
     <x-header />
@@ -23,7 +18,7 @@
             </h1>
             <button class="openModalAdd flex items-center gap-1 py-1.5  pl-2 pr-4 bg-gray-900/75 text-white rounded-lg" type="button" data-modal-toggle="add-user-modal">
                 <x-mysvg name="add" />
-                <span>Add User</span>    
+                <span>Add User</span>
             </button>
         </div>
         <table id="usersTable" class="dark:bg-light-dark dark:text-white">
@@ -37,7 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($json as $product)
+                @foreach ($data as $product)
                     <tr class="">
                         <td>{{ $product['id'] }}</td>
                         <td>{{ $product['name'] }}</td>

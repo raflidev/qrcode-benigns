@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\KuponController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,10 +30,5 @@ Route::get('/test', function () {
     return view('test');
 });
 
-Route::get('/users', function () {
-    return view('users');
-});
-
-Route::get('/coupons', function () {
-    return view('coupons');
-});
+Route::get('/users', [UserController::class, 'index'])->name('user.index');
+Route::get('/coupons', [KuponController::class, 'index'])->name('kupon.index');
