@@ -12,23 +12,25 @@
                 </button>
             </div>
             <div class="pt-4 pb-8 px-6 lg:px-8">
-                <form class="flex flex-col gap-4" action="#">
+                <form class="flex flex-col gap-4" method="POST" action="{{route('kupon.store')}}">
+                    @csrf
+                    @method('POST')
                     <div>
-                        <label for="kode_unik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Unik</label>
-                        <input type="text" name="kode_unik" id="kode_unik" placeholder="kode unik" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                        <label for="kodeunik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Unik</label>
+                        <input type="text" name="kodeunik" id="kodeunik" placeholder="kode unik" value="{{old('kodeunik')}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                     </div>
                     <div>
                         <label for="max_use" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Maksimal Penggunaan</label>
-                        <input type="text" name="name" id="max_use" placeholder="Max Use" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                        <input type="number" name="max_use" id="max_use" placeholder="Max Use" value="{{old('max_use')}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                     </div>
                     <div>
                         <label for="benefit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Benefit</label>
-                        <textarea name="benefit" id="benefit"  class="resize-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white " placeholder="Benefit"></textarea>
+                        <textarea name="benefit" id="benefit"  value="{{old('benefit')}}" class="resize-none bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white " placeholder="Benefit" required></textarea>
                     </div>
-                
-                    <button type="submit" id="submitCoupon" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Coupon</button>
+
+                    <button type="submit" id="" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add Coupon</button>
                 </form>
             </div>
         </div>
     </div>
-</div> 
+</div>

@@ -32,3 +32,5 @@ Route::get('/test', function () {
 
 Route::get('/users', [UserController::class, 'index'])->name('user.index');
 Route::get('/coupons', [KuponController::class, 'index'])->name('kupon.index');
+Route::post('/coupons', [KuponController::class, 'store'])->name('kupon.store');
+Route::get('/coupons/delete/{id}', [KuponController::class, 'destroy'])->name('kupon.destroy');

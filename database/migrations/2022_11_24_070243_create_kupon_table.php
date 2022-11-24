@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('benefit');
             $table->string('kodeunik');
-            $table->string('max_use');
+            $table->integer('max_use');
             $table->timestamps();
         });
     }

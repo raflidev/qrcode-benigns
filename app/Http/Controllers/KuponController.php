@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kupon;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class KuponController extends Controller
@@ -37,7 +36,20 @@ class KuponController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'benefit' => 'required',
+            'kodeunik' => 'required',
+            'max_use'  => 'required',
+        ]);
+
+        $kupon = Kupon::create([
+            'benefit' => $request->benefit,
+            'kodeunik' => $request->kodeunik,
+            'max_use' => $request->max_use,
+        ]);
+        $kupon->save();
+
+        return redirect()->route('kupon.index');
     }
 
     /**
@@ -82,6 +94,8 @@ class KuponController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kupon = Kupon::find($id);
+        $kupon->delete();
+        return redirect()->route('kupon.index');
     }
 }
