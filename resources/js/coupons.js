@@ -3,11 +3,6 @@ $(document).ready( function () {
     $('.openModalAdd').on('click', function(e){
         $('#add-coupon-modal').removeClass('hidden');
     });
-    // $('#deleteCoupon').on('click', function(e){
-    //     $('#delete-coupon-modal').removeClass('hidden');
-    //     var id = e.target.dataset.id;
-    //     console.log(id)
-    // });
     $('.deleteCoupon').on('click', function(e){
         $('#delete-coupon-modal').removeClass('hidden');
         var id = $(this).attr('data-id');
@@ -15,8 +10,14 @@ $(document).ready( function () {
             location.href = '/coupons/delete/'+id;
         });
     });
+    $('.editCoupon').on('click', function(e){
+        $('#edit-coupon-modal').removeClass('hidden');
+        var id = $(this).attr('data-id');
+        getDataByID(id);
+    });
     $('.closeModal').on('click', function(e){
         $('#add-coupon-modal').addClass('hidden');
+        $('#edit-coupon-modal').addClass('hidden');
     });
     $('.closeModal').on('click', function(e){
         $('#delete-coupon-modal').addClass('hidden');
@@ -33,14 +34,14 @@ $(document).ready( function () {
 
 function getDataByID(id) {
     // get data from database
+    $.get("/api/coupons/"+id, function(data){
+        document.getElementById("edit_id").value = data[0].id;
+        document.getElementById("edit_benefit").value = data[0].benefit;
+        document.getElementById("edit_kodeunik").value = data[0].kodeunik;
+        document.getElementById("edit_max_use").value = data[0].max_use;
+        document.getElementById("edit_submitCoupon").innerHTML = "Edit Coupon"
+    });
 
-    const data = {
-        benefit :"a",
-        kode_unik :"b",
-        max_use :"c"
-    }
-    //dummy data ^^
-    return data
 }
 
 const darkModeStatus = localStorage.getItem('dark-mode')
@@ -52,18 +53,3 @@ document.getElementById('dark-mode-toggle').addEventListener('click',() => {
         document.getElementById('couponsTable_wrapper').classList.add('text-white')
     }
 })
-
-
-function editCoupon(id) {
-    document.querySelector('#add-coupon-modal').classList.remove('hidden');
-    let data = getDataByID(id); // get data from database
-
-    // manipulating input value
-    document.getElementById("benefit").value = data.benefit;
-    document.getElementById("kode_unik").value = data.kode_unik;
-    document.getElementById("max_use").value = data.max_use;
-    document.getElementById("submitCoupon").innerHTML = "Edit Coupon"
-}
-function removeCoupon(id){
-    // remove coupon from database
-}

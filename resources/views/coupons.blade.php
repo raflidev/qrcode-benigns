@@ -43,7 +43,7 @@
                         <td>{{ date('d F Y h:m:s', strtotime($product['created_at'])); }}</td>
                         <td>{{ date('d F Y h:m:s', strtotime($product['updated_at'])); }}</td>
                         <td>
-                            <button id="editCoupon" data-id="{{$product['id']}}" onclick="editCoupon({{ $product['id'] }})" type="button" class="border h-9 w-20 border-blue-400/50 hover:border-blue-400 text-blue-400 bg-transparent hover:bg-blue-200/30 hover:text-blue-600 rounded-lg text-sm py-1.5 pr-2 pl-1 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                            <button id="editCoupon" data-id="{{$product['id']}}" type="button" class="editCoupon border h-9 w-20 border-blue-400/50 hover:border-blue-400 text-blue-400 bg-transparent hover:bg-blue-200/30 hover:text-blue-600 rounded-lg text-sm py-1.5 pr-2 pl-1 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
                                 <x-mysvg name="edit"/>
                                 <span class="">Edit</span>
                             </button>
@@ -57,8 +57,9 @@
             </tbody>
         </table>
     </div>
-    @include ('modal.add-coupon')
-    @include ('modal.delete-coupon')
+    @include ('modal.coupon.add-coupon')
+    @include ('modal.coupon.edit-coupon')
+    @include ('modal.coupon.delete-coupon')
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 </body>

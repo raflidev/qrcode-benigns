@@ -18,6 +18,12 @@ class UserController extends Controller
         return view('users', ['data' => $data]);
     }
 
+    public function apiUser($id)
+    {
+        $data = User::where('id', $id)->get();
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +42,22 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'confirm_password' => 'required|same:password',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+
+        ]);
+
+        $user->save();
+        return redirect()->route('user.index')->with('success', 'User berhasil ditambahakan');
     }
 
     /**
@@ -68,9 +89,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user = User::find($request->id);
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password)
+        ]);
+
+        $user->save();
+        return redirect()->route('user.index')->with('success', 'User berhasil diupdate');
     }
 
     /**
@@ -81,6 +110,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('user.index')->with('success', 'User berhasil dihapus');
     }
 }

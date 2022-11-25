@@ -18,6 +18,12 @@ class KuponController extends Controller
         return view('coupons', ['data' => $data]);
     }
 
+    public function apiKupon($id)
+    {
+        $data = Kupon::where('id', $id)->get();
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -49,7 +55,7 @@ class KuponController extends Controller
         ]);
         $kupon->save();
 
-        return redirect()->route('kupon.index');
+        return redirect()->route('kupon.index')->with('success', 'Kupon berhasil ditambahkan');
     }
 
     /**
@@ -81,9 +87,17 @@ class KuponController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $kupon = Kupon::find($request->id);
+        $kupon->update([
+            'benefit' => $request->benefit,
+            'kodeunik' => $request->kodeunik,
+            'max_use' => $request->max_use,
+        ]);
+
+        $kupon->save();
+        return redirect()->route('kupon.index')->with('success', 'Kupon berhasil diupdate');
     }
 
     /**
@@ -96,6 +110,6 @@ class KuponController extends Controller
     {
         $kupon = Kupon::find($id);
         $kupon->delete();
-        return redirect()->route('kupon.index');
+        return redirect()->route('kupon.index')->with('success', 'Kupon berhasil dihapus');
     }
 }

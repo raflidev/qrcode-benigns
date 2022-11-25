@@ -30,7 +30,15 @@ Route::get('/test', function () {
     return view('test');
 });
 
-Route::get('/users', [UserController::class, 'index'])->name('user.index');
 Route::get('/coupons', [KuponController::class, 'index'])->name('kupon.index');
+Route::get('/api/coupons/{id}', [KuponController::class, 'apiKupon'])->name('kupon.apiKupon');
 Route::post('/coupons', [KuponController::class, 'store'])->name('kupon.store');
+Route::put('/coupons', [KuponController::class, 'update'])->name('kupon.update');
 Route::get('/coupons/delete/{id}', [KuponController::class, 'destroy'])->name('kupon.destroy');
+
+
+Route::get('/users', [UserController::class, 'index'])->name('user.index');
+Route::get('/api/users/{id}', [UserController::class, 'apiUser'])->name('user.apiUser');
+Route::post('/users', [UserController::class, 'store'])->name('user.store');
+Route::put('/users', [UserController::class, 'update'])->name('user.update');
+Route::get('/users/delete/{id}', [UserController::class, 'destroy'])->name('user.destroy');
