@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\KuponController;
+use App\Http\Controllers\QRController;
+use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,3 +44,8 @@ Route::get('/api/users/{id}', [UserController::class, 'apiUser'])->name('user.ap
 Route::post('/users', [UserController::class, 'store'])->name('user.store');
 Route::put('/users', [UserController::class, 'update'])->name('user.update');
 Route::get('/users/delete/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+
+Route::get('/transactions', [TransaksiController::class, 'index'])->name('transaction.index');
+// Route::get('/transactions', [TransaksiController::class, 'index'])->name('transaction.index');
+
+Route::get('/qr', [QRController::class, 'index'])->name('qr.index');

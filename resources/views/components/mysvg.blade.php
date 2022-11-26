@@ -30,6 +30,10 @@
     <span class="material-icons-outlined scale-110 2xl:scale-150">help_outline</span>
 @elseif($name === "visibility")
     <span class="material-icons-outlined scale-75">visibility</span>
+@elseif($name === "camera")
+    <span class="material-icons-outlined scale-75">camera</span>
+@elseif($name === "cash")
+    <span class="material-icons-outlined scale-75">cash-100</span>
 @elseif($name === "")
     <span class="material-icons-outlined "></span>
 

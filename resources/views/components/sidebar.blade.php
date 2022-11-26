@@ -7,7 +7,7 @@
     </div>
     <div class="navigation text-white flex flex-col justify-between h-full ">
         <div class="navigation-component flex flex-col gap-2 2xl:gap-3">
-            <div class="navElement group flex gap-3 h-12 p-4 2xl:gap-4  rounded-xl hover:bg-dark items-center cursor-pointer {{ $activePage === 'dashboard' ? "bg-black/40" : "" }}" id="dashboard"> 
+            <div class="navElement group flex gap-3 h-12 p-4 2xl:gap-4  rounded-xl hover:bg-dark items-center cursor-pointer {{ $activePage === 'dashboard' ? "bg-black/40" : "" }}" id="dashboard">
                 {{-- icon --}}
                 <div class="w-4 h-4 flex justify-center items-center  group-hover:opacity-100 {{ $activePage === 'dashboard' ? "opacity-100" : "opacity-50" }}">
                     <x-mysvg name="home" />
@@ -34,6 +34,24 @@
                     Coupons
                 </p>
             </div>
+            <div class="navElement group flex gap-3 2xl:gap-4 h-12 p-4 rounded-xl hover:bg-black/30   items-center cursor-pointer {{ $activePage === 'transactions' ? "bg-black/40 " : "" }}" id="transactions">
+                {{-- icon --}}
+                <div class="w-4 h-4 flex justify-center items-center group-hover:opacity-100 {{ $activePage === 'transactions' ? "opacity-100 " : "opacity-50" }}">
+                    <x-mysvg name="cash"/>
+                </div>
+                <p class="2xl:text-lg group-hover:text-white/100 {{ $activePage === 'transactions' ? "text-white/100 " : "text-white/50" }}">
+                    Transactions
+                </p>
+            </div>
+            <div class="navElement group flex gap-3 2xl:gap-4 h-12 p-4 rounded-xl hover:bg-black/30   items-center cursor-pointer {{ $activePage === 'qr' ? "bg-black/40 " : "" }}" id="qr">
+                {{-- icon --}}
+                <div class="w-4 h-4 flex justify-center items-center group-hover:opacity-100 {{ $activePage === 'qr' ? "opacity-100 " : "opacity-50" }}">
+                    <x-mysvg name="camera"/>
+                </div>
+                <p class="2xl:text-lg group-hover:text-white/100 {{ $activePage === 'qr' ? "text-white/100 " : "text-white/50" }}">
+                    QR Scan
+                </p>
+            </div>
         </div>
         <div class="navigation-action">
             <div class="navElement group flex gap-3 2xl:gap-4 h-12 p-4 rounded-xl hover:bg-black/40 bg-black/20  items-center cursor-pointer" id=''>
@@ -52,7 +70,7 @@
 
 <script>
     const list = document.querySelectorAll('.navigation-component .navElement')
-  
+
     list.forEach(element => {
         const id = element.id
         if (id === {{ $activePage }}){

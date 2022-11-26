@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kupon extends Model
+class Admin extends Model
 {
     use HasFactory;
 
-    protected $table = 'kupon';
+    protected $table = "admin";
 
     protected $fillable = [
-        'benefit',
-        'kodeunik',
-        'max_use',
+        'nama',
+        'username',
+        'password',
     ];
 
     public function transaksi()
