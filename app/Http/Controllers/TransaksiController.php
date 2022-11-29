@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kupon;
 use App\Models\Transaksi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -42,7 +44,16 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::where('email', $request->email)->first();
+        $kupon = Kupon::where('kodeunik', $request->kodeunik)->first();
+        $transaksi = Transaksi::create([
+            'id_user' => $user['id'],
+            'id_kupon' => $kupon['id'],
+            'id_admin' => $request->id_admin,
+        ]);
+
+        $transaksi->save();
+        return redirect()->route('qr.index')->with('success', 'Kupon berhasil diclaim');
     }
 
     /**
@@ -53,7 +64,52 @@ class TransaksiController extends Controller
      */
     public function show($id)
     {
-        //
+        $param = explode(",", $id);
+        if (count($param) < 2) {
+            $error = [
+                'status' => 'error',
+                'message' => 'QR CODE tidak valid'
+            ];
+        } else {
+            $user = User::where('email', $param[0])->first();
+            if ($user == null) {
+                $error = [
+                    'status' => 'error',
+                    'message' => 'User tidak terdaftar'
+                ];
+            } else {
+                // cek ketersediaan kupon
+                $avaiable = Kupon::where('kodeunik', $param[0])->first();
+                // sudah pernah pakai belum?
+                $count = Transaksi::join('kupon', 'kupon.id', '=', 'history.id_kupon')
+                    ->where('kupon.kodeunik', $param[0])
+                    ->count();
+                if ($avaiable['max_use'] > $count) {
+
+                    $user = Transaksi::join('users', 'users.id', '=', 'history.id_user')
+                        ->join('kupon', 'kupon.id', '=', 'history.id_kupon')
+                        ->where('kupon.kodeunik', $param[0])
+                        ->where('users.email', $param[1])
+                        ->count();
+                    if ($user == 0) {
+                        return response()->json($avaiable);
+                    } else {
+                        $error = [
+                            'status' => 'error',
+                            'message' => 'Kupon sudah pernah digunakan'
+                        ];
+                    }
+                } else {
+                    $error = [
+                        'status' => 'error',
+                        'message' => 'Kupon sudah habis / Tidak berlaku'
+                    ];
+                }
+            }
+        }
+
+
+        return response()->json($error);
     }
 
     /**

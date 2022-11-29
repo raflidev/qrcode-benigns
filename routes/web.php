@@ -4,6 +4,7 @@ use App\Http\Controllers\KuponController;
 use App\Http\Controllers\QRController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
+use App\Models\Transaksi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,3 +50,5 @@ Route::get('/transactions', [TransaksiController::class, 'index'])->name('transa
 // Route::get('/transactions', [TransaksiController::class, 'index'])->name('transaction.index');
 
 Route::get('/qr', [QRController::class, 'index'])->name('qr.index');
+Route::get('/checkQR/{id}', [TransaksiController::class, 'show'])->name('qr.checkQR');
+Route::post('/QRTransactions', [TransaksiController::class, 'store'])->name('qr.store');

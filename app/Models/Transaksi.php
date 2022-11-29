@@ -11,6 +11,12 @@ class Transaksi extends Model
 
     protected $table = "history";
 
+    protected $fillable = [
+        'id_admin',
+        'id_user',
+        'id_kupon',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

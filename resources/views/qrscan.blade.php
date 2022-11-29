@@ -17,19 +17,90 @@
                 QR SCAN
             </h1>
         </div>
-        <div id="reader" width="100px" class="w-1/2"></div>
+        <div class="flex space-x-10">
+          <div class="w-1/2">
+            <div id="reader" width="100px" class=""></div>
+          </div>
+          <div class="w-1/2">
+            <div>
+              <span id="scanReq" class="font-bold text-xl">Silakan Scan QR Code</span>
+              <div id="result" class="hidden space-y-4 ">
+                  <div>
+                      <span class="font-bold">Kode yang terscan</span>
+                      <div id="resultQR" class="uppercase">ASD</div>
+                  </div>
+                  <div id="resultMessage" class="text-red-500">
+                      <span class="font-bold">Error :</span>
+                      <div id="resultMessageText"></div>
+                  </div>
+                  <form class="hidden space-y-4" id="resultTrue" method="POST" action="{{route('qr.store')}}">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" name="id_admin" value='1'>
+                    <input type="hidden" name="kodeunik" class="kodeunik" value="">
+                    <div>
+                        <span class="font-bold">Benefit</span>
+                        <div id="benefit" class="">Diskon 50%</div>
+                    </div>
+                    <div>
+                        <span class="font-bold">Email</span>
+                        <input type="text" name="email" class="block" id="email" value="asd" readonly>
+                    </div>
+                    <div>
+                        <button class="flex items-center gap-1 py-1.5  pl-2 pr-4 bg-gray-900/75 text-white rounded-lg" type="submit">
+                            <x-mysvg name="add" />
+                            <span>Proses Kupon</span>
+                        </button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
     <script src="https://unpkg.com/html5-qrcode"></script>
     <script>
+        var lastResult, countResults = 0;
         function onScanSuccess(decodedText, decodedResult) {
-            // handle the scanned code as you like, for example:
-            console.log(`Code matched = ${decodedText}`, decodedResult);
+            if (decodedText !== lastResult) {
+                ++countResults;
+                lastResult = decodedText;
+                // Handle on success condition with the decoded message.
+                console.log(`Scan result ${decodedText}`, decodedResult);
+
+                getQR(decodedText);
+                $('#result').removeClass('hidden');
+                $('#scanReq').addClass('hidden');
+            }
+        }
+
+        function getQR(id) {
+            var param = id.split(',')
+            $('#resultQR').text(param[0]);
+            $('.kodeunik').val(param[0]);
+            $.get('/checkQR/'+id, function (data) {
+                if(data.status != "error"){
+                    $('#resultTrue').removeClass('hidden');
+                    $('#resultMessage').removeClass('hidden');
+                    $('#resultMessageText').text("Kupon dapat digunakan");
+                    $('#resultMessage').removeClass('text-red-500');
+                    $('#resultMessage').addClass('text-green-500');
+                    $('#benefit').text(data.benefit);
+                    $('#email').val(param[1]);
+                }else{
+                    console.log(data)
+                    $('#resultMessage').removeClass('hidden');
+                    if(data.message == "Kupon sudah pernah digunakan"){
+                        $('#resultMessageText').text("Kupon pada email"+ param[1] +" " +data.message);
+                    }else{
+                        $('#resultMessageText').text(data.message);
+                    }
+                }
+            })
         }
 
         function onScanFailure(error) {
-            // handle scan failure, usually better to ignore and keep scanning.
-            // for example:
-            // console.warn(`Code scan error = ${error}`);
+            //
         }
 
         let html5QrcodeScanner = new Html5QrcodeScanner(
