@@ -91,7 +91,7 @@
                     console.log(data)
                     $('#resultMessage').removeClass('hidden');
                     if(data.message == "Kupon sudah pernah digunakan"){
-                        $('#resultMessageText').text("Kupon pada email"+ param[1] +" " +data.message);
+                        $('#resultMessageText').text("Kupon pada email "+ param[1] +" sudah digunakan");
                     }else{
                         $('#resultMessageText').text(data.message);
                     }

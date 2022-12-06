@@ -52,3 +52,4 @@ Route::get('/transactions', [TransaksiController::class, 'index'])->name('transa
 Route::get('/qr', [QRController::class, 'index'])->name('qr.index');
 Route::get('/checkQR/{id}', [TransaksiController::class, 'show'])->name('qr.checkQR');
 Route::post('/QRTransactions', [TransaksiController::class, 'store'])->name('qr.store');
+Route::get('/transactions/delete/{id}', [TransaksiController::class, 'destroy'])->name('qr.destroy');

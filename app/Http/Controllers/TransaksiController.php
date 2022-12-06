@@ -71,7 +71,7 @@ class TransaksiController extends Controller
                 'message' => 'QR CODE tidak valid'
             ];
         } else {
-            $user = User::where('email', $param[0])->first();
+            $user = User::where('email', $param[1])->first();
             if ($user == null) {
                 $error = [
                     'status' => 'error',
@@ -143,6 +143,8 @@ class TransaksiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $transaksi = Transaksi::find($id);
+        $transaksi->delete();
+        return redirect()->route('transaction.index')->with('success', 'Transaksi berhasil dihapus');
     }
 }
