@@ -15,14 +15,13 @@ return new class extends Migration
     {
         Schema::create('history', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("id_admin");
             $table->unsignedBigInteger("id_user");
             $table->unsignedBigInteger("id_kupon");
+            $table->string('id_unik');
             $table->timestamps();
         });
 
         Schema::table('history', function (Blueprint $table) {
-            $table->foreign('id_admin')->references('id')->on('admin');
             $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_kupon')->references('id')->on('kupon');
         });

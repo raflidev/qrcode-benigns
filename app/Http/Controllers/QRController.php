@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kupon;
+use App\Models\Transaksi;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QRController extends Controller
 {
@@ -34,7 +38,15 @@ class QRController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kupon = Kupon::where('kodeunik', $request->kodeunik)->first();
+        $transaksi = Transaksi::create([
+            'id_kupon' => $kupon['id'],
+            'id_user' => Auth::user()->id,
+            'id_unik' => $request->id_unik,
+        ]);
+
+        $transaksi->save();
+        return redirect()->route('qr.index')->with('success', 'Kupon berhasil diclaim');
     }
 
     /**
@@ -45,9 +57,42 @@ class QRController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $param = explode(",", $id);
+        if (count($param) < 2) {
+            $error = [
+                'status' => 'error',
+                'message' => 'QR CODE tidak valid'
+            ];
+        } else {
+            // cek ketersediaan kupon
+            $avaiable = Kupon::where('kodeunik', $param[1])->first();
+            // sudah pernah pakai belum?
+            $count = Transaksi::join('kupon', 'kupon.id', '=', 'history.id_kupon')
+                ->where('kupon.kodeunik', $param[1])
+                ->count();
+            if ($avaiable['max_use'] > $count) {
+                $user = Transaksi::join('kupon', 'kupon.id', '=', 'history.id_kupon')
+                    ->where('history.id_unik', $param[0])
+                    ->count();
+                if ($user == 0) {
+                    return response()->json($avaiable);
+                } else {
+                    $error = [
+                        'status' => 'error',
+                        'message' => 'Kupon sudah pernah digunakan'
+                    ];
+                }
+            } else {
+                $error = [
+                    'status' => 'error',
+                    'message' => 'Kupon sudah habis / Tidak berlaku'
+                ];
+            }
+        }
 
+
+        return response()->json($error);
+    }
     /**
      * Show the form for editing the specified resource.
      *

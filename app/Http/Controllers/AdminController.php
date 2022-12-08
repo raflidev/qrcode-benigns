@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,7 +14,17 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $greet = "";
+        $hour = Carbon::now()->timezone('Asia/Jakarta')->format('H');
+        if ($hour < 12) {
+            $greet = 'Good morning';
+        } else if ($hour < 17) {
+            $greet = 'Good afternoon';
+        } else {
+            $greet = 'Good evening';
+        }
+
+        return view('dashboard', ['greet' => $greet]);
     }
 
     /**

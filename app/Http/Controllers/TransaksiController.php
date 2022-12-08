@@ -6,6 +6,7 @@ use App\Models\Kupon;
 use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
@@ -17,13 +18,13 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        // $data = Transaksi::with(['user', 'kupon'])->first();
-        $data = Transaksi::select('history.*', 'users.name', 'users.email', 'kupon.kodeunik', 'admin.nama as admin')
+        $data = Transaksi::select('history.*', 'users.name as name', 'users.username', 'kupon.kodeunik')
             ->join('users', 'users.id', '=', 'history.id_user')
             ->join('kupon', 'kupon.id', '=', 'history.id_kupon')
-            ->join('admin', 'admin.id', '=', 'history.id_admin')
             ->get();
-        return view('transactions', ['data' => $data]);
+
+        $kupon = Kupon::all();
+        return view('transactions', ['data' => $data, 'kupon' => $kupon]);
     }
 
     /**
@@ -44,16 +45,15 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::where('email', $request->email)->first();
         $kupon = Kupon::where('kodeunik', $request->kodeunik)->first();
         $transaksi = Transaksi::create([
-            'id_user' => $user['id'],
             'id_kupon' => $kupon['id'],
-            'id_admin' => $request->id_admin,
+            'id_user' => Auth::user()->id,
+            'id_unik' => $request->id_unik,
         ]);
 
         $transaksi->save();
-        return redirect()->route('qr.index')->with('success', 'Kupon berhasil diclaim');
+        return redirect()->route('transaction.index')->with('success', 'Kupon berhasil diclaim');
     }
 
     /**

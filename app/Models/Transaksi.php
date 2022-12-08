@@ -12,8 +12,8 @@ class Transaksi extends Model
     protected $table = "history";
 
     protected $fillable = [
-        'id_admin',
         'id_user',
+        'id_unik',
         'id_kupon',
     ];
 
@@ -25,10 +25,5 @@ class Transaksi extends Model
     public function kupon()
     {
         return $this->belongsTo(Kupon::class);
-    }
-
-    public function admin()
-    {
-        return $this->belongsTo(Admin::class);
     }
 }

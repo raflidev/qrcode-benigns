@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -22,6 +23,34 @@ class UserController extends Controller
     {
         $data = User::where('id', $id)->get();
         return response()->json($data);
+    }
+
+    public function login_index()
+    {
+        return view('login');
+    }
+
+    public function login(Request $request)
+    {
+        $rules = [
+            'username' => 'required',
+            'password' => 'required',
+        ];
+
+        $customMessages = [
+            'required' => ':attribute tidak boleh kosong.'
+        ];
+
+        $this->validate($request, $rules, $customMessages);
+
+
+        if (Auth::attempt($request->only('username', 'password'))) {
+            return redirect()->route('dashboard')->with('success', 'Login Berhasil');
+        }
+
+        return back()->withErrors([
+            'wrong' => 'Username atau password anda salah',
+        ]);
     }
 
     /**
@@ -44,14 +73,16 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'username' => 'required|unique:users',
             'password' => 'required',
+            'role' => 'required',
             'confirm_password' => 'required|same:password',
         ]);
 
         $user = User::create([
             'name' => $request->name,
-            'email' => $request->email,
+            'username' => $request->username,
+            'role' => $request->role,
             'password' => bcrypt($request->password),
 
         ]);
@@ -94,7 +125,8 @@ class UserController extends Controller
         $user = User::find($request->id);
         $user->update([
             'name' => $request->name,
-            'email' => $request->email,
+            'username' => $request->username,
+            'role' => $request->role,
             'password' => bcrypt($request->password)
         ]);
 
@@ -113,5 +145,13 @@ class UserController extends Controller
         $user = User::find($id);
         $user->delete();
         return redirect()->route('user.index')->with('success', 'User berhasil dihapus');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('user.login')->with('success', 'Berhasil Logout');
     }
 }

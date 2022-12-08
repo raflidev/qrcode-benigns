@@ -16,6 +16,7 @@
                     Dashboard
                 </p>
             </div>
+            @if(Auth::user()->role == 'superadmin')
             <div class="navElement group flex gap-3 2xl:gap-4 h-12 p-4 rounded-xl hover:bg-black/30  items-center cursor-pointer {{ $activePage === 'users' ? "bg-black/40" : "" }}" id="users">
                 {{-- icon --}}
                 <div class="w-4 h-4 flex justify-center items-center group-hover:opacity-100 {{ $activePage === 'users' ? "opacity-100" : "opacity-50" }}">
@@ -25,6 +26,7 @@
                     Users
                 </p>
             </div>
+            @endif
             <div class="navElement group flex gap-3 2xl:gap-4 h-12 p-4 rounded-xl hover:bg-black/30   items-center cursor-pointer {{ $activePage === 'coupons' ? "bg-black/40 " : "" }}" id="coupons">
                 {{-- icon --}}
                 <div class="w-4 h-4 flex justify-center items-center group-hover:opacity-100 {{ $activePage === 'coupons' ? "opacity-100 " : "opacity-50" }}">
@@ -59,9 +61,13 @@
                 <div class="w-4 h-4 flex justify-center items-center opacity-100 group:opacity-100">
                     <x-mysvg name="logout" />
                 </div>
-                <p class="2xl:text-lg text-white/100 group-hover:text-white/100">
-                    Log Out
-                </p>
+                <form action="{{route('user.logout')}}" method="POST">
+                    @csrf
+                    @method('POST')
+                    <button type="submit" class="2xl:text-lg text-white/100 group-hover:text-white/100">
+                        Log Out
+                    </button>
+                </form>
             </div>
         </div>
     </div>

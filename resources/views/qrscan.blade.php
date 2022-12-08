@@ -27,7 +27,7 @@
               <div id="result" class="hidden space-y-4 ">
                   <div>
                       <span class="font-bold">Kode yang terscan</span>
-                      <div id="resultQR" class="uppercase">ASD</div>
+                      <div id="resultQR" class="uppercase"></div>
                   </div>
                   <div id="resultMessage" class="text-red-500">
                       <span class="font-bold">Error :</span>
@@ -36,15 +36,11 @@
                   <form class="hidden space-y-4" id="resultTrue" method="POST" action="{{route('qr.store')}}">
                     @csrf
                     @method('POST')
-                    <input type="hidden" name="id_admin" value='1'>
                     <input type="hidden" name="kodeunik" class="kodeunik" value="">
+                    <input type="hidden" name="id_unik" class="id_unik" value="">
                     <div>
                         <span class="font-bold">Benefit</span>
                         <div id="benefit" class="">Diskon 50%</div>
-                    </div>
-                    <div>
-                        <span class="font-bold">Email</span>
-                        <input type="text" name="email" class="block" id="email" value="asd" readonly>
                     </div>
                     <div>
                         <button class="flex items-center gap-1 py-1.5  pl-2 pr-4 bg-gray-900/75 text-white rounded-lg" type="submit">
@@ -76,8 +72,10 @@
 
         function getQR(id) {
             var param = id.split(',')
-            $('#resultQR').text(param[0]);
-            $('.kodeunik').val(param[0]);
+            console.log(id);
+            $('#resultQR').text(param[1]);
+            $('.kodeunik').val(param[1]);
+            $('.id_unik').val(param[0]);
             $.get('/checkQR/'+id, function (data) {
                 if(data.status != "error"){
                     $('#resultTrue').removeClass('hidden');
@@ -90,11 +88,7 @@
                 }else{
                     console.log(data)
                     $('#resultMessage').removeClass('hidden');
-                    if(data.message == "Kupon sudah pernah digunakan"){
-                        $('#resultMessageText').text("Kupon pada email "+ param[1] +" sudah digunakan");
-                    }else{
-                        $('#resultMessageText').text(data.message);
-                    }
+                    $('#resultMessageText').text(data.message);
                 }
             })
         }

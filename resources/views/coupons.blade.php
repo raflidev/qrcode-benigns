@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>BENING'S | COUPON</title>
     @vite(['resources/css/app.css', 'resources/js/app.js','resources/js/coupons.js','resources/js/header.js'])
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 </head>
@@ -12,19 +12,45 @@
     <x-header />
     <x-sidebar activePage='coupons' />
     <div class="content p-7 flex flex-col gap-8 ml-64 2xl:ml-80 2xl:gap-12 dark:bg-accent min-h-[calc(100vh-48px)] 2xl:min-h-[calc(100vh-56px)]">
+        @if (count($errors) > 0)
+        <div class="w-full bg-red-500 text-white py-2 px-5 rounded-xl">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </div>
+        @endif
+        @if (Session::has('success'))
+            <div
+                class="success w-full px-5 bg-green-500 text-white py-3 rounded items-center">
+                {{ Session::get('success') }}
+                <div class="float-right" onclick="closePopup()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor"
+                        class="w-6 h-6  hover:rounded-full text-white hover:bg-green-800 hover:cursor-pointer">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
+            </div>
+        @endif
         <div class="content-header flex items-center justify-between">
             <h1 class="font-bold text-3xl 2xl:text-4xl dark:text-white ">
                 Coupons
             </h1>
-            <button class="openModalAdd flex items-center gap-1 py-1.5  pl-2 pr-4 bg-gray-900/75 text-white rounded-lg" type="button" data-modal-toggle="add-user-modal">
-                <x-mysvg name="add" />
-                <span>Add Coupon</span>
-            </button>
+            <div class="flex space-x-4">
+                <a href="{{route('kupon.generate')}}" target="_blank" class="flex items-center gap-1 py-1.5  pl-2 pr-4 bg-green-900/75 text-white rounded-lg">
+                    <x-mysvg name="add" />
+                    <span>Generate Coupon</span>
+                </a>
+                <button class="openModalAdd flex items-center gap-1 py-1.5  pl-2 pr-4 bg-gray-900/75 text-white rounded-lg" type="button" data-modal-toggle="add-user-modal">
+                    <x-mysvg name="add" />
+                    <span>Add Coupon</span>
+                </button>
+            </div>
         </div>
         <table id="couponsTable" class="dark:bg-light-dark dark:text-white">
             <thead class="">
                 <tr class="">
-                    <th class="w-4" >ID</th>
+                    <th class="w-4">No</th>
                     <th >Kode Unik</th>
                     <th class="w-24">Max use</th>
                     <th>Benefit</th>
@@ -34,9 +60,10 @@
                 </tr>
             </thead>
             <tbody>
+                <?php $no=1; ?>
                 @foreach ($data as $product)
                     <tr class="">
-                        <td>{{ $product['id'] }}</td>
+                        <td>{{ $no }}</td>
                         <td>{{ $product['kodeunik'] }}</td>
                         <td>{{ $product['max_use'] }}</td>
                         <td>{{ $product['benefit'] }}</td>
@@ -53,6 +80,7 @@
                             </button>
                         </td>
                     </tr>
+                    <?php $no++; ?>
                 @endforeach
             </tbody>
         </table>
@@ -62,5 +90,11 @@
     @include ('modal.coupon.delete-coupon')
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script>
+        function closePopup() {
+            $('.success').addClass('hidden');
+            // document.getElementsByClassName('success').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>

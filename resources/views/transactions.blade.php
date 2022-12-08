@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>BENING'S | Transaction</title>
     @vite(['resources/css/app.css','resources/js/app.js','resources/js/transaction.js','resources/js/header.js'])
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
 </head>
@@ -18,16 +18,15 @@
             </h1>
             <button class="openModalAdd flex items-center gap-1 py-1.5  pl-2 pr-4 bg-gray-900/75 text-white rounded-lg" type="button" data-modal-toggle="add-user-modal">
                 <x-mysvg name="add" />
-                <span>Add User</span>
+                <span>Add Transaction</span>
             </button>
         </div>
 
         <table id="transactionTable" class="dark:bg-light-dark dark:text-white">
             <thead class="">
                 <tr class="">
-                    <th class="w-4">ID</th>
-                    <th>Nama</th>
-                    <th>Email</th>
+                    <th class="w-4">No</th>
+                    <th>ID Unik Transaksi</th>
                     <th>Kode Unik Kupon</th>
                     <th>Nama Admin</th>
                     <th>Dibuat pada</th>
@@ -36,13 +35,13 @@
                 </tr>
             </thead>
             <tbody>
+                <?php $no= 1; ?>
                 @foreach ($data as $product)
                     <tr class="">
-                        <td>{{ $product['id'] }}</td>
-                        <td>{{ $product['name'] }}</td>
-                        <td>{{ $product['email'] }}</td>
+                        <td>{{ $no }}</td>
+                        <td>{{ $product['id_unik'] }}</td>
                         <td>{{ $product['kodeunik'] }}</td>
-                        <td>{{ $product['admin'] }}</td>
+                        <td>{{ $product['name'] }}</td>
                         <td>{{ date('d F Y h:m:s', strtotime($product['created_at'])); }}</td>
                         <td>{{ date('d F Y h:m:s', strtotime($product['updated_at'])); }}</td>
                         <td>
@@ -52,11 +51,13 @@
                             </button>
                         </td>
                     </tr>
+                    <?php $no++; ?>
                 @endforeach
             </tbody>
         </table>
     </div>
     @include('modal.transaction.delete-transaction')
+    @include('modal.transaction.add-transaction', ['kupon' => $kupon])
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 </body>

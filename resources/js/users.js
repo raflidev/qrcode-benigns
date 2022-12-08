@@ -35,7 +35,7 @@ function getDataByID(id) {
     $.get("/api/users/"+id, function(data){
         document.getElementById("edit_id").value = data[0].id;
         document.getElementById("edit_name").value = data[0].name;
-        document.getElementById("edit_email").value = data[0].email;
+        document.getElementById("edit_username").value = data[0].username;
     });
 }
 

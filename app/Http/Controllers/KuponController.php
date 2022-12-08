@@ -44,7 +44,7 @@ class KuponController extends Controller
     {
         $request->validate([
             'benefit' => 'required',
-            'kodeunik' => 'required',
+            'kodeunik' => 'required|unique:kupon',
             'max_use'  => 'required',
         ]);
 
@@ -111,5 +111,11 @@ class KuponController extends Controller
         $kupon = Kupon::find($id);
         $kupon->delete();
         return redirect()->route('kupon.index')->with('success', 'Kupon berhasil dihapus');
+    }
+
+    public function generate()
+    {
+        $kupon = Kupon::all();
+        return view('coupons_generate', ['kupon' => $kupon]);
     }
 }
