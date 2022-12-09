@@ -44,7 +44,10 @@ class QRController extends Controller
             'id_user' => Auth::user()->id,
             'id_unik' => $request->id_unik,
         ]);
-
+        $kupon->update([
+            'max_use' => $kupon['max_use'] - 1
+        ]);
+        $kupon->save();
         $transaksi->save();
         return redirect()->route('qr.index')->with('success', 'Kupon berhasil diclaim');
     }
@@ -67,10 +70,10 @@ class QRController extends Controller
             // cek ketersediaan kupon
             $avaiable = Kupon::where('kodeunik', $param[1])->first();
             // sudah pernah pakai belum?
-            $count = Transaksi::join('kupon', 'kupon.id', '=', 'history.id_kupon')
-                ->where('kupon.kodeunik', $param[1])
-                ->count();
-            if ($avaiable['max_use'] > $count) {
+            // $count = Transaksi::join('kupon', 'kupon.id', '=', 'history.id_kupon')
+            //     ->where('kupon.kodeunik', $param[1])
+            //     ->count();
+            if ($avaiable['max_use'] > 0) {
                 $user = Transaksi::join('kupon', 'kupon.id', '=', 'history.id_kupon')
                     ->where('history.id_unik', $param[0])
                     ->count();

@@ -3,6 +3,9 @@ $(document).ready( function () {
     $('.openModalAdd').on('click', function(e){
         $('#add-user-modal').removeClass('hidden');
     });
+    $('.openModalChange').on('click', function(e){
+        $('#change-password-user-modal').removeClass('hidden');
+    });
     $('.deleteUser').on('click', function(e){
         $('#delete-user-modal').removeClass('hidden');
         var id = $(this).attr('data-id');
@@ -18,10 +21,12 @@ $(document).ready( function () {
     $('.closeModal').on('click', function(e){
         $('#add-user-modal').addClass('hidden');
         $('#edit-user-modal').addClass('hidden');
-    });
-    $('.closeModal').on('click', function(e){
+        $('#change-password-user-modal').addClass('hidden');
         $('#delete-user-modal').addClass('hidden');
     });
+    // $('.closeModal').on('click', function(e){
+    //     $('#delete-user-modal').addClass('hidden');
+    // });
 
     let darkModeStatus = localStorage.getItem('dark-mode')
     if (darkModeStatus === 'true'){

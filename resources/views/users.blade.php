@@ -36,10 +36,16 @@
             <h1 class="font-bold text-3xl 2xl:text-4xl dark:text-white ">
                 Users
             </h1>
-            <button class="openModalAdd flex items-center gap-1 py-1.5  pl-2 pr-4 bg-gray-900/75 text-white rounded-lg" type="button" data-modal-toggle="add-user-modal">
-                <x-mysvg name="add" />
-                <span>Add User</span>
-            </button>
+            <div class="flex space-x-4">
+                <button class="openModalChange flex items-center gap-1 py-1.5  pl-2 pr-4 bg-yellow-900/75 text-white rounded-lg" type="button" data-modal-toggle="add-user-modal">
+                    <x-mysvg name="edit" />
+                    <span>Change Password</span>
+                </button>
+                <button class="openModalAdd flex items-center gap-1 py-1.5  pl-2 pr-4 bg-gray-900/75 text-white rounded-lg" type="button" data-modal-toggle="add-user-modal">
+                    <x-mysvg name="add" />
+                    <span>Add User</span>
+                </button>
+            </div>
         </div>
         <table id="usersTable" class="dark:bg-light-dark dark:text-white">
             <thead class="">
@@ -82,6 +88,7 @@
     @include ('modal.user.add-user')
     @include ('modal.user.edit-user')
     @include('modal.user.delete-user')
+    @include('modal.user.change-password-user')
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script>

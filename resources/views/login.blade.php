@@ -14,30 +14,30 @@
             @csrf
             @method('POST')
             @if ($errors->first('wrong'))
-                            <div id="error" class="w-full px-5 bg-red-500 text-white py-3 rounded -mt-10 items-center">
-                                {{ $errors->first('wrong') }}
-                                <div class="float-right" onclick="closePopup()">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor"
-                                        class="w-6 h-6  hover:rounded-full text-white hover:bg-red-800 hover:cursor-pointer">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </div>
-                            </div>
-                        @endif
-                        @if (Session::has('success'))
-                            <div id="success"
-                                class="w-full px-5 bg-green-500 text-white py-3 rounded -mt-16 items-center">
-                                {{ Session::get('success') }}
-                                <div class="float-right" onclick="closePopup()">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor"
-                                        class="w-6 h-6  hover:rounded-full text-white hover:bg-green-800 hover:cursor-pointer">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </div>
-                            </div>
-                        @endif
+                <div id="error" class="w-full px-5 bg-red-500 text-white py-3 rounded -mt-10 items-center">
+                    {{ $errors->first('wrong') }}
+                    <div class="float-right" onclick="closePopup1()">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor"
+                            class="w-6 h-6  hover:rounded-full text-white hover:bg-red-800 hover:cursor-pointer">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                </div>
+            @endif
+            @if (Session::has('success'))
+                <div id="success"
+                    class="w-full px-5 bg-green-500 text-white py-3 rounded -mt-16 items-center">
+                    {{ Session::get('success') }}
+                    <div class="float-right" onclick="closePopup2()">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor"
+                            class="w-6 h-6  hover:rounded-full text-white hover:bg-green-800 hover:cursor-pointer">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                </div>
+            @endif
             <div>
                 <img src="https://beningsindonesia.com/assets/img/logo/benings_indonesia_black.png" class="w-36" alt="" srcset="">
             </div>
@@ -114,13 +114,11 @@
         }
         loginForm.addEventListener('submit',onSubmitLogin);
 
-        function closePopup() {
+        function closePopup1() {
             document.getElementById('error').classList.add('hidden');
-            document.getElementById('success').classList.add('hidden');
         }
-        function loading() {
-            document.getElementById('loading').classList.remove('hidden');
-            document.getElementById('masuk').classList.add('hidden');
+        function closePopup2() {
+            document.getElementById('success').classList.add('hidden');
         }
     </script>
 </body>

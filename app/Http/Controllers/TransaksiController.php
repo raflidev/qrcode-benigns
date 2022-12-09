@@ -45,15 +45,27 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        $kupon = Kupon::where('kodeunik', $request->kodeunik)->first();
-        $transaksi = Transaksi::create([
-            'id_kupon' => $kupon['id'],
-            'id_user' => Auth::user()->id,
-            'id_unik' => $request->id_unik,
-        ]);
-
-        $transaksi->save();
-        return redirect()->route('transaction.index')->with('success', 'Kupon berhasil diclaim');
+        $avaiable = Kupon::where('kodeunik', $request->kodeunik)->first();
+        // sudah pernah pakai belum?
+        // $count = Transaksi::join('kupon', 'kupon.id', '=', 'history.id_kupon')
+        //     ->where('kupon.kodeunik', $avaiable['kodeunik'])
+        //     ->count();
+        if ($avaiable['max_use'] > 0) {
+            $transaksi = Transaksi::create([
+                'id_kupon' => $avaiable['id'],
+                'id_user' => Auth::user()->id,
+                'id_unik' => $request->id_unik,
+            ]);
+            $kupon = Kupon::find($avaiable['id']);
+            $kupon->update([
+                'max_use' => $avaiable['max_use'] - 1,
+            ]);
+            $kupon->save();
+            $transaksi->save();
+            return redirect()->route('transaction.index')->with('success', 'Kupon berhasil diclaim');
+        } else {
+            return redirect()->route('transaction.index')->with('error', 'Kupon sudah habis');
+        }
     }
 
     /**
@@ -144,6 +156,10 @@ class TransaksiController extends Controller
     public function destroy($id)
     {
         $transaksi = Transaksi::find($id);
+        $kupon = Kupon::find($transaksi->id_kupon);
+        $kupon->update([
+            'max_use' => $kupon['max_use'] + 1,
+        ]);
         $transaksi->delete();
         return redirect()->route('transaction.index')->with('success', 'Transaksi berhasil dihapus');
     }

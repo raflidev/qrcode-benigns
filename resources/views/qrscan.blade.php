@@ -12,6 +12,31 @@
     <x-header />
     <x-sidebar activePage="qr"/>
     <div class="content p-7 flex flex-col gap-8 ml-64 2xl:ml-80 2xl:gap-12 dark:bg-accent min-h-[calc(100vh-48px)] 2xl:min-h-[calc(100vh-56px)]  " >
+        @if (Session::has('error'))
+            <div id="error" class="w-full px-5 bg-red-500 text-white py-3 rounded items-center">
+                {{ Session::get('error') }}
+                <div class="float-right" onclick="closePopup1()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor"
+                        class="w-6 h-6  hover:rounded-full text-white hover:bg-red-800 hover:cursor-pointer">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
+            </div>
+        @endif
+        @if (Session::has('success'))
+            <div id="success"
+                class="success w-full px-5 bg-green-500 text-white py-3 rounded items-center">
+                {{ Session::get('success') }}
+                <div class="float-right" onclick="closePopup2()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor"
+                        class="w-6 h-6  hover:rounded-full text-white hover:bg-green-800 hover:cursor-pointer">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
+            </div>
+        @endif
         <div class="flex items-center justify-between">
             <h1 class="font-bold text-3xl 2xl:text-4xl dark:text-white ">
                 QR SCAN
@@ -111,5 +136,13 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script>
+        function closePopup1() {
+            document.getElementById('error').classList.add('hidden');
+        }
+        function closePopup2() {
+            document.getElementById('success').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>

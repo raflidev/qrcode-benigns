@@ -134,6 +134,29 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'User berhasil diupdate');
     }
 
+    public function update_password(Request $request)
+    {
+
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        $user = User::find(Auth::user()->id);
+
+        if (Auth::attempt(['username' => $user->username, 'password' => $request->old_password])) {
+            $user->update([
+                'password' => bcrypt($request->new_password)
+            ]);
+
+            $user->save();
+            return redirect()->route('user.login')->with('success', 'Password berhasil diupdate, silakan login kembali');
+        } else {
+            return redirect()->route('user.index')->with('error', 'Password lama anda salah');
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -149,6 +172,7 @@ class UserController extends Controller
 
     public function logout(Request $request)
     {
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
