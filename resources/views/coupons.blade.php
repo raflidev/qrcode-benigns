@@ -36,6 +36,7 @@
             <h1 class="font-bold text-3xl 2xl:text-4xl dark:text-white ">
                 Coupons
             </h1>
+            @if(Auth::user()->role == 'superadmin')
             <div class="flex space-x-4">
                 <a href="{{route('kupon.generate')}}" target="_blank" class="flex items-center gap-1 py-1.5  pl-2 pr-4 bg-green-900/75 text-white rounded-lg">
                     <x-mysvg name="add" />
@@ -46,17 +47,22 @@
                     <span>Add Coupon</span>
                 </button>
             </div>
+            @endif
         </div>
         <table id="couponsTable" class="dark:bg-light-dark dark:text-white">
             <thead class="">
                 <tr class="">
                     <th class="w-4">No</th>
                     <th >Kode Unik</th>
+                    @if(Auth::user()->role == 'superadmin')
                     <th class="w-24">Max use</th>
+                    @endif
                     <th>Benefit</th>
                     <th>Dibuat pada</th>
                     <th>Terakhir di update</th>
+                    @if(Auth::user()->role == 'superadmin')
                     <th class="w-56 2xl:w-44">Action</th>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -65,10 +71,13 @@
                     <tr class="">
                         <td>{{ $no }}</td>
                         <td>{{ $product['kodeunik'] }}</td>
+                        @if(Auth::user()->role == 'superadmin')
                         <td>{{ $product['max_use'] }}</td>
+                        @endif
                         <td>{{ $product['benefit'] }}</td>
                         <td>{{ date('d F Y h:m:s', strtotime($product['created_at'])); }}</td>
                         <td>{{ date('d F Y h:m:s', strtotime($product['updated_at'])); }}</td>
+                        @if(Auth::user()->role == 'superadmin')
                         <td>
                             <button id="editCoupon" data-id="{{$product['id']}}" type="button" class="editCoupon border h-9 w-20 border-blue-400/50 hover:border-blue-400 text-blue-400 bg-transparent hover:bg-blue-200/30 hover:text-blue-600 rounded-lg text-sm py-1.5 pr-2 pl-1 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
                                 <x-mysvg name="edit"/>
@@ -79,6 +88,7 @@
                                 <span class="">Remove</span>
                             </button>
                         </td>
+                        @endif
                     </tr>
                     <?php $no++; ?>
                 @endforeach

@@ -18,6 +18,9 @@ return new class extends Migration
             $table->unsignedBigInteger("id_user");
             $table->unsignedBigInteger("id_kupon");
             $table->string('id_unik');
+            $table->string('nama_user');
+            $table->string('jenis_mitra');
+            $table->string('no_hp');
             $table->timestamps();
         });
 

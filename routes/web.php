@@ -27,22 +27,21 @@ Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard')->
 
 Route::get('/coupons', [KuponController::class, 'index'])->name('kupon.index')->middleware(['auth']);
 Route::get('/api/coupons/{id}', [KuponController::class, 'apiKupon'])->name('kupon.apiKupon')->middleware(['auth']);
-Route::post('/coupons', [KuponController::class, 'store'])->name('kupon.store')->middleware(['auth']);
-Route::put('/coupons', [KuponController::class, 'update'])->name('kupon.update')->middleware(['auth']);
-Route::get('/coupons/delete/{id}', [KuponController::class, 'destroy'])->name('kupon.destroy')->middleware(['auth']);
+Route::post('/coupons', [KuponController::class, 'store'])->name('kupon.store')->middleware(['auth', 'superadmin']);
+Route::put('/coupons', [KuponController::class, 'update'])->name('kupon.update')->middleware(['auth', 'superadmin']);
+Route::get('/coupons/delete/{id}', [KuponController::class, 'destroy'])->name('kupon.destroy')->middleware(['auth', 'superadmin']);
 Route::get('/coupons/generate', [KuponController::class, 'generate'])->name('kupon.generate')->middleware(['auth']);
 
 
-Route::get('/users', [UserController::class, 'index'])->name('user.index')->middleware(['auth']);
+Route::get('/users', [UserController::class, 'index'])->name('user.index')->middleware(['auth', 'superadmin']);
 Route::get('/api/users/{id}', [UserController::class, 'apiUser'])->name('user.apiUser')->middleware(['auth']);
-Route::post('/users', [UserController::class, 'store'])->name('user.store')->middleware(['auth']);
-Route::put('/users', [UserController::class, 'update'])->name('user.update')->middleware(['auth']);
-Route::put('/users/change', [UserController::class, 'update_password'])->name('user.update_password')->middleware(['auth']);
-Route::get('/users/delete/{id}', [UserController::class, 'destroy'])->name('user.destroy')->middleware(['auth']);
+Route::post('/users', [UserController::class, 'store'])->name('user.store')->middleware(['auth', 'superadmin']);
+Route::put('/users', [UserController::class, 'update'])->name('user.update')->middleware(['auth', 'superadmin']);
+Route::put('/users/change', [UserController::class, 'update_password'])->name('user.update_password')->middleware(['auth', 'superadmin']);
+Route::get('/users/delete/{id}', [UserController::class, 'destroy'])->name('user.destroy')->middleware(['auth', 'superadmin']);
 
 Route::get('/transactions', [TransaksiController::class, 'index'])->name('transaction.index')->middleware(['auth']);
 Route::post('/transactions', [TransaksiController::class, 'store'])->name('transaction.store')->middleware(['auth']);
-// Route::get('/transactions', [TransaksiController::class, 'index'])->name('transaction.index')->middleware(['auth']);
 
 Route::get('/qr', [QRController::class, 'index'])->name('qr.index')->middleware(['auth']);
 Route::get('/checkQR/{id}', [QRController::class, 'show'])->name('qr.checkQR')->middleware(['auth']);

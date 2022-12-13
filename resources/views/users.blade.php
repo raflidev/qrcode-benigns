@@ -53,6 +53,7 @@
                     <th class="w-4">ID</th>
                     <th>Nama</th>
                     <th>Username</th>
+                    <th>Outlet</th>
                     <th>Role</th>
                     <th>Dibuat pada</th>
                     <th>Terakhir di update</th>
@@ -66,6 +67,7 @@
                         <td>{{ $no }}</td>
                         <td>{{ $product['name'] }}</td>
                         <td>{{ $product['username'] }}</td>
+                        <td>{{ $product['outlet'] }}</td>
                         <td>{{ $product['role'] }}</td>
                         <td>{{ date('d F Y h:m:s', strtotime($product['created_at'])); }}</td>
                         <td>{{ date('d F Y h:m:s', strtotime($product['updated_at'])); }}</td>

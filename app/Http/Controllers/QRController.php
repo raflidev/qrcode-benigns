@@ -43,6 +43,9 @@ class QRController extends Controller
             'id_kupon' => $kupon['id'],
             'id_user' => Auth::user()->id,
             'id_unik' => $request->id_unik,
+            'jenis_mitra' => $request->jenis_mitra,
+            'nama_user' => $request->nama_user,
+            'no_hp' => $request->no_hp,
         ]);
         $kupon->update([
             'max_use' => $kupon['max_use'] - 1
@@ -69,10 +72,6 @@ class QRController extends Controller
         } else {
             // cek ketersediaan kupon
             $avaiable = Kupon::where('kodeunik', $param[1])->first();
-            // sudah pernah pakai belum?
-            // $count = Transaksi::join('kupon', 'kupon.id', '=', 'history.id_kupon')
-            //     ->where('kupon.kodeunik', $param[1])
-            //     ->count();
             if ($avaiable['max_use'] > 0) {
                 $user = Transaksi::join('kupon', 'kupon.id', '=', 'history.id_kupon')
                     ->where('history.id_unik', $param[0])

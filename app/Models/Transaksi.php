@@ -15,6 +15,9 @@ class Transaksi extends Model
         'id_user',
         'id_unik',
         'id_kupon',
+        'jenis_mitra',
+        'nama_user',
+        'no_hp',
     ];
 
     public function user()

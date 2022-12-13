@@ -55,7 +55,7 @@
                       <div id="resultQR" class="uppercase"></div>
                   </div>
                   <div id="resultMessage" class="text-red-500">
-                      <span class="font-bold">Error :</span>
+                      <span class="font-bold">Hasil :</span>
                       <div id="resultMessageText"></div>
                   </div>
                   <form class="hidden space-y-4" id="resultTrue" method="POST" action="{{route('qr.store')}}">
@@ -65,7 +65,23 @@
                     <input type="hidden" name="id_unik" class="id_unik" value="">
                     <div>
                         <span class="font-bold">Benefit</span>
-                        <div id="benefit" class="">Diskon 50%</div>
+                        <div id="benefit" class=""></div>
+                    </div>
+                    <div>
+                        <span class="font-bold">Nama Customer</span>
+                        <input type="text" id="nama_user" name="nama_user" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Nama User">
+                    </div>
+                    <div>
+                        <span class="font-bold">No HP</span>
+                        <input type="text" id="no_hp" name="no_hp" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="0812931xxxxxx">
+                    </div>
+                    <div>
+                        <span class="font-bold">Jenis Mitra</span>
+                        <select type="text" id="jenis_mitra" name="jenis_mitra" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                            <option value="Reseller">Reseller</option>
+                            <option value="Agen">Agen</option>
+                            <option value="Distributor">Distributor</option>
+                        </select>
                     </div>
                     <div>
                         <button class="flex items-center gap-1 py-1.5  pl-2 pr-4 bg-gray-900/75 text-white rounded-lg" type="submit">

@@ -41,6 +41,7 @@ function getDataByID(id) {
         document.getElementById("edit_id").value = data[0].id;
         document.getElementById("edit_name").value = data[0].name;
         document.getElementById("edit_username").value = data[0].username;
+        document.getElementById("edit_outlet").value = data[0].outlet;
     });
 }
 

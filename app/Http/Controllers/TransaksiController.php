@@ -18,10 +18,18 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        $data = Transaksi::select('history.*', 'users.name as name', 'users.username', 'kupon.kodeunik')
-            ->join('users', 'users.id', '=', 'history.id_user')
-            ->join('kupon', 'kupon.id', '=', 'history.id_kupon')
-            ->get();
+        if (Auth::user()->role == "superadmin") {
+            $data = Transaksi::select('history.*', 'users.name as name', 'users.outlet', 'kupon.kodeunik')
+                ->join('users', 'users.id', '=', 'history.id_user')
+                ->join('kupon', 'kupon.id', '=', 'history.id_kupon')
+                ->get();
+        } else {
+            $data = Transaksi::select('history.*', 'users.name as name', 'users.outlet', 'kupon.kodeunik')
+                ->join('users', 'users.id', '=', 'history.id_user')
+                ->join('kupon', 'kupon.id', '=', 'history.id_kupon')
+                ->where('users.id', Auth::user()->id)
+                ->get();
+        }
 
         $kupon = Kupon::all();
         return view('transactions', ['data' => $data, 'kupon' => $kupon]);
@@ -55,6 +63,9 @@ class TransaksiController extends Controller
                 'id_kupon' => $avaiable['id'],
                 'id_user' => Auth::user()->id,
                 'id_unik' => $request->id_unik,
+                'jenis_mitra' => $request->jenis_mitra,
+                'nama_user' => $request->nama_user,
+                'no_hp' => $request->no_hp,
             ]);
             $kupon = Kupon::find($avaiable['id']);
             $kupon->update([

@@ -75,6 +75,7 @@ class UserController extends Controller
             'name' => 'required',
             'username' => 'required|unique:users',
             'password' => 'required',
+            'outlet' => 'required',
             'role' => 'required',
             'confirm_password' => 'required|same:password',
         ]);
@@ -82,6 +83,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
+            'outlet' => $request->outlet,
             'role' => $request->role,
             'password' => bcrypt($request->password),
 
@@ -126,6 +128,7 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'username' => $request->username,
+            'outlet' => $request->outlet,
             'role' => $request->role,
             'password' => bcrypt($request->password)
         ]);

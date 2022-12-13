@@ -2,7 +2,7 @@
 
 <div class="sidebar fixed top-0 left-0 w-64 bg-light-dark dark:bg-dark h-full flex flex-col gap-3 px-3 py-6 2xl:w-80 2xl:px-4 2xl:py-8 2xl:gap-6">
     <div class="identity text-white h-24 flex  justify-center items-center font-bold text-2xl 2xl:gap-3 gap-2 2xl:text-3xl">
-        <x-mysvg name="help"/>
+        {{-- <x-mysvg name="help"/> --}}
         <span>Benings</span>
     </div>
     <div class="navigation text-white flex flex-col justify-between h-full ">

@@ -7,12 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BENING'S | Dashboard</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
 </head>
 <body>
     <x-header />
     <x-sidebar activePage='dashboard' />
     <div class="content p-7 flex flex-col gap-8 ml-64 2xl:ml-80 2xl:gap-12 dark:bg-accent min-h-[calc(100vh-48px)] 2xl:min-h-[calc(100vh-56px)]">
+        @if (Session::has('error'))
+            <div id="error" class="w-full px-5 bg-red-500 text-white py-3 rounded items-center">
+                {{ Session::get('error') }}
+                <div class="float-right" onclick="closePopup1()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor"
+                        class="w-6 h-6  hover:rounded-full text-white hover:bg-red-800 hover:cursor-pointer">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
+            </div>
+        @endif
         <div class="text-4xl font-bold">
             Hi, {{Auth::user()->name;}}. {{$greet}}!
         </div>
@@ -69,5 +80,10 @@
 
         </div>
     </div>
+    <script>
+         function closePopup1() {
+            document.getElementById('error').classList.add('hidden');
+        }
+    </script>
 </body>
 </html>

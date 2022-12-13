@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('username')->unique();
             $table->string('password');
+            $table->string('outlet');
             $table->string('role');
             $table->rememberToken();
             $table->timestamps();
@@ -28,8 +29,16 @@ return new class extends Migration
             'name' => "Bening's",
             'username' => 'bening2022',
             'password' => bcrypt('adminbening2022'),
+            'outlet' => 'Bandung',
             'role' => 'superadmin',
         ]);
+        DB::table('users')->insert([
+            'name' => "Rafli Ramadhan",
+            'username' => 'test',
+            'password' => bcrypt('test'),
+            'outlet' => "Bandung",
+            'role' => 'admin',
+        ],);
     }
 
     /**
