@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kupon;
+use App\Models\Transaksi;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -24,7 +27,11 @@ class AdminController extends Controller
             $greet = 'Good evening';
         }
 
-        return view('dashboard', ['greet' => $greet]);
+        $user = User::all()->count();
+        $transaction = Transaksi::all()->count();
+        $coupon = Kupon::all()->count();
+
+        return view('dashboard', ['greet' => $greet, 'user' => $user, 'transaction' => $transaction, 'coupon' => $coupon]);
     }
 
     /**

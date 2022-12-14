@@ -56,9 +56,9 @@
                     <label for="" class="text-sm font-medium">Password*</label>
                     <div class="input-element flex gap-2 border-2 px-4 py-2 p-1  bg-gray-100 rounded-full">
                         <input id="input-password" type="password" name="password" value="{{old('password')}}" placeholder="Enter your password" class="border-none focus:outline-none text-sm focus:border-none font-base bg-transparent w-full px-1" required>
-                        <button id="show-password" class="rounded-full invisible flex items-center text-black/50 hover:text-black">
+                        {{-- <button id="show-password" class="rounded-full invisible flex items-center text-black/50 hover:text-black">
                             <x-mysvg name="visibility"/>
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
             </div>

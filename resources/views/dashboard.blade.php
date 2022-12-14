@@ -28,11 +28,12 @@
             Hi, {{Auth::user()->name;}}. {{$greet}}!
         </div>
         <div class="grid grid-cols-5 gap-4">
+            @if(Auth::user()->role == 'superadmin')
             <div class="border border-black rounded-xl bg-accent/30">
                 <div class="p-5">
                     <div class="flex justify-between items-center">
                         <div>
-                            <div class="font-bold text-3xl">4</div>
+                            <div class="font-bold text-3xl">{{$user}}</div>
                             <div>User</div>
                         </div>
                         <div class="">
@@ -48,7 +49,7 @@
                 <div class="p-5">
                     <div class="flex justify-between items-center">
                         <div>
-                            <div class="font-bold text-3xl">10</div>
+                            <div class="font-bold text-3xl">{{$transaction}}</div>
                             <div>Transaction</div>
                         </div>
                         <div class="">
@@ -59,12 +60,13 @@
                     </div>
                 </div>
             </div>
+            @endif
 
             <div class="border border-black rounded-xl bg-accent/30">
                 <div class="p-5">
                     <div class="flex justify-between items-center">
                         <div>
-                            <div class="font-bold text-3xl">9</div>
+                            <div class="font-bold text-3xl">{{$coupon}}</div>
                             <div>Coupons</div>
                         </div>
                         <div class="">

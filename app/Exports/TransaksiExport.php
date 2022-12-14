@@ -13,11 +13,36 @@ class TransaksiExport implements FromCollection, WithHeadings
      */
     public function collection()
     {
-        return Transaksi::all();
+        return Transaksi::select(
+            'history.id',
+            'history.id_unik',
+            'kupon.kodeunik',
+            'users.name as name',
+            'users.outlet',
+            'history.jenis_mitra',
+            'history.nama_user',
+            'history.no_hp',
+            'history.created_at',
+            'history.updated_at',
+        )
+            ->join('users', 'users.id', '=', 'history.id_user')
+            ->join('kupon', 'kupon.id', '=', 'history.id_kupon')
+            ->get();
     }
 
     public function headings(): array
     {
-        return ["ID", "Name", "Email"];
+        return [
+            'ID',
+            'ID Unik',
+            'Kode Unik',
+            'Nama Admin',
+            'Outlet',
+            'Jenis Mitra',
+            'Nama Customer',
+            'No HP',
+            'Dibuat pada',
+            'Terakhir Update',
+        ];
     }
 }

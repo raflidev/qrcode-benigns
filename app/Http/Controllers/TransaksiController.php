@@ -6,6 +6,7 @@ use App\Exports\TransaksiExport;
 use App\Models\Kupon;
 use App\Models\Transaksi;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -162,7 +163,7 @@ class TransaksiController extends Controller
 
     public function excel()
     {
-        return Excel::download(new TransaksiExport, 'Transaction.xlsx');
+        return Excel::download(new TransaksiExport, 'Transaction-' . Carbon::now() . '.xlsx');
     }
 
     /**

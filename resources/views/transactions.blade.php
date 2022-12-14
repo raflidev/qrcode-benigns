@@ -43,7 +43,7 @@
             </h1>
             @if(Auth::user()->role == 'superadmin')
             <div class="flex space-x-3">
-                <a href="{{route('transaction.excel')}}" target="_blank" class="openModalAdd flex items-center gap-1 py-1.5  pl-2 pr-4 bg-green-900/75 text-white rounded-lg" type="button" data-modal-toggle="add-user-modal">
+                <a href="{{route('transaction.excel')}}" target="_blank" class="flex items-center gap-1 py-1.5  pl-2 pr-4 bg-green-900/75 text-white rounded-lg">
                     <x-mysvg name="add" />
                     <span>Export Excel</span>
                 </a>

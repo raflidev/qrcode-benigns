@@ -19,7 +19,7 @@
                         <div class="absolute bottom-2 left-16">
                             {!! QrCode::size(70)->generate(uniqid().','.$data['kodeunik']); !!}
                         </div>
-                        <img src="/images/Proyellow.jpg" alt="" srcset="">
+                        <img src="/images/Proyellow.png" class="w-full" alt="" srcset="">
                     </div>
                 @endfor
             @else
@@ -28,11 +28,14 @@
                         <div class="absolute bottom-2 left-16">
                             {!! QrCode::size(70)->generate(uniqid().','.$data['kodeunik']); !!}
                         </div>
-                        <img src="/images/QSwitched.jpg" alt="" srcset="">
+                        <img src="/images/QSwitched.png" class="w-full" alt="" srcset="">
                     </div>
                 @endfor
             @endif
         </div>
     @endforeach
+    <script>
+        window.print();
+    </script>
 </body>
 </html>
