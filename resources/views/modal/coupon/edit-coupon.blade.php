@@ -18,7 +18,7 @@
                     <input type="hidden" id="edit_id" name="id" value="">
                     <div>
                         <label for="kodeunik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Unik</label>
-                        <input type="text" name="kodeunik" id="edit_kodeunik" placeholder="kode unik" value="{{old('kodeunik')}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                        <input type="text" name="kodeunik" id="edit_kodeunik" placeholder="kode unik" value="{{old('kodeunik')}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" readonly>
                     </div>
                     <div>
                         <label for="max_use" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Maksimal Penggunaan</label>

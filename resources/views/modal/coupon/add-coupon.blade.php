@@ -15,9 +15,16 @@
                 <form class="flex flex-col gap-4" method="POST" action="{{route('kupon.store')}}">
                     @csrf
                     @method('POST')
-                    <div>
+                    {{-- <div>
                         <label for="kodeunik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Unik</label>
                         <input type="text" name="kodeunik" id="kodeunik" placeholder="kode unik" value="{{old('kodeunik')}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                    </div> --}}
+                    <div>
+                        <label for="kodeunik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Unik</label>
+                        <select name="kodeunik" id="kodeunik" placeholder="kode unik"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                            <option value="switchedNdyag">Q-Switched Ndyag Laser</option>
+                            <option value="proyellowLaser">Proyellow Laser Complete</option>
+                        </select>
                     </div>
                     <div>
                         <label for="max_use" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Maksimal Penggunaan</label>

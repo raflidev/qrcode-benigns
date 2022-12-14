@@ -42,10 +42,16 @@
                 Transactions
             </h1>
             @if(Auth::user()->role == 'superadmin')
-            <button class="openModalAdd flex items-center gap-1 py-1.5  pl-2 pr-4 bg-gray-900/75 text-white rounded-lg" type="button" data-modal-toggle="add-user-modal">
-                <x-mysvg name="add" />
-                <span>Add Transaction</span>
-            </button>
+            <div class="flex space-x-3">
+                <a href="{{route('transaction.excel')}}" target="_blank" class="openModalAdd flex items-center gap-1 py-1.5  pl-2 pr-4 bg-green-900/75 text-white rounded-lg" type="button" data-modal-toggle="add-user-modal">
+                    <x-mysvg name="add" />
+                    <span>Export Excel</span>
+                </a>
+                <button class="openModalAdd flex items-center gap-1 py-1.5  pl-2 pr-4 bg-gray-900/75 text-white rounded-lg" type="button" data-modal-toggle="add-user-modal">
+                    <x-mysvg name="add" />
+                    <span>Add Transaction</span>
+                </button>
+            </div>
             @endif
         </div>
 

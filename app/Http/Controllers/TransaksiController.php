@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TransaksiExport;
 use App\Models\Kupon;
 use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TransaksiController extends Controller
 {
@@ -156,6 +158,11 @@ class TransaksiController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    public function excel()
+    {
+        return Excel::download(new TransaksiExport, 'Transaction.xlsx');
     }
 
     /**

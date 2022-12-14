@@ -42,6 +42,7 @@ Route::get('/users/delete/{id}', [UserController::class, 'destroy'])->name('user
 
 Route::get('/transactions', [TransaksiController::class, 'index'])->name('transaction.index')->middleware(['auth']);
 Route::post('/transactions', [TransaksiController::class, 'store'])->name('transaction.store')->middleware(['auth']);
+Route::get('/transactions/excel', [TransaksiController::class, 'excel'])->name('transaction.excel')->middleware(['auth', 'superadmin']);
 
 Route::get('/qr', [QRController::class, 'index'])->name('qr.index')->middleware(['auth']);
 Route::get('/checkQR/{id}', [QRController::class, 'show'])->name('qr.checkQR')->middleware(['auth']);

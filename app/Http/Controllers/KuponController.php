@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kupon;
 use Illuminate\Http\Request;
+use PDF;
 
 class KuponController extends Controller
 {
@@ -117,5 +118,8 @@ class KuponController extends Controller
     {
         $kupon = Kupon::all();
         return view('coupons_generate', ['kupon' => $kupon]);
+
+        // $pdf = PDF::loadView('coupons_generate', ['kupon' => $kupon]);
+        // return $pdf->download('invoice.pdf');
     }
 }
