@@ -110,7 +110,11 @@ class KuponController extends Controller
     public function destroy($id)
     {
         $kupon = Kupon::find($id);
-        $kupon->delete();
+        try {
+            $kupon->delete();
+        } catch (\Throwable $e) {
+            return redirect()->route('kupon.index')->with('error', 'Kupon tidak boleh dihapus');
+        }
         return redirect()->route('kupon.index')->with('success', 'Kupon berhasil dihapus');
     }
 
