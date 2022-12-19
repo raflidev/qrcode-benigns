@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BENING'S | Dashboard</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js','resources/js/header.js'])
 </head>
 <body>
     <x-header />
@@ -82,6 +82,7 @@
 
         </div>
     </div>
+    <script src=""></script>
     <script>
          function closePopup1() {
             document.getElementById('error').classList.add('hidden');
