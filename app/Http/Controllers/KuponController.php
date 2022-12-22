@@ -47,11 +47,13 @@ class KuponController extends Controller
             'benefit' => 'required',
             'kodeunik' => 'required|unique:kupon',
             'max_use'  => 'required',
+            'expired_at' => 'required',
         ]);
 
         $kupon = Kupon::create([
             'benefit' => $request->benefit,
             'kodeunik' => $request->kodeunik,
+            'expired_at' => $request->expired_at,
             'max_use' => $request->max_use,
         ]);
         $kupon->save();
@@ -94,6 +96,7 @@ class KuponController extends Controller
         $kupon->update([
             'benefit' => $request->benefit,
             'kodeunik' => $request->kodeunik,
+            'expired_at' => $request->expired_at,
             'max_use' => $request->max_use,
         ]);
 

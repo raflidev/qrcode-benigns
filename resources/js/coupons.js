@@ -39,6 +39,7 @@ function getDataByID(id) {
         document.getElementById("edit_benefit").value = data[0].benefit;
         document.getElementById("edit_kodeunik").value = data[0].kodeunik;
         document.getElementById("edit_max_use").value = data[0].max_use;
+        document.getElementById("edit_expired_at").value = data[0].expired_at;
         document.getElementById("edit_submitCoupon").innerHTML = "Edit Coupon"
     });
 

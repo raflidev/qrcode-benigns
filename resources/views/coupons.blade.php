@@ -12,7 +12,13 @@
     <x-header />
     <x-sidebar activePage='coupons' />
     <div class="content p-7 flex flex-col gap-8 ml-64 2xl:ml-80 2xl:gap-12 dark:bg-accent min-h-[calc(100vh-48px)] 2xl:min-h-[calc(100vh-56px)]">
-
+        @if (count($errors) > 0)
+        <div class="w-full bg-red-500 text-white py-2 px-5 rounded-xl">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </div>
+        @endif
         @if (Session::has('error'))
             <div
                 class="error w-full px-5 bg-red-500 text-white py-3 rounded items-center">
@@ -66,6 +72,7 @@
                     @endif
                     <th>Benefit</th>
                     <th>Dibuat pada</th>
+                    <th>Expired</th>
                     <th>Terakhir di update</th>
                     @if(Auth::user()->role == 'superadmin')
                     <th class="w-56 2xl:w-44">Action</th>
@@ -81,6 +88,7 @@
                         @if(Auth::user()->role == 'superadmin')
                         <td>{{ $product['max_use'] }}</td>
                         @endif
+                        <td>{{ $product['expired_at'] }}</td>
                         <td>{{ $product['benefit'] }}</td>
                         <td>{{ date('d F Y h:m:s', strtotime($product['created_at'])); }}</td>
                         <td>{{ date('d F Y h:m:s', strtotime($product['updated_at'])); }}</td>

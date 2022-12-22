@@ -64,7 +64,7 @@ class QRController extends Controller
     public function show($id)
     {
         $param = explode(",", $id);
-        if (count($param) < 2) {
+        if (count($param) < 3) {
             $error = [
                 'status' => 'error',
                 'message' => 'QR CODE tidak valid'
@@ -72,23 +72,30 @@ class QRController extends Controller
         } else {
             // cek ketersediaan kupon
             $avaiable = Kupon::where('kodeunik', $param[1])->first();
-            if ($avaiable['max_use'] > 0) {
-                $user = Transaksi::join('kupon', 'kupon.id', '=', 'history.id_kupon')
-                    ->where('history.id_unik', $param[0])
-                    ->count();
-                if ($user == 0) {
-                    return response()->json($avaiable);
+            if (date('Y-m-d H:i:s') > $avaiable['expired_at']) {
+                $error = [
+                    'status' => 'error',
+                    'message' => 'Kupon sudah expired'
+                ];
+            } else {
+                if ($avaiable['max_use'] > 0) {
+                    $user = Transaksi::join('kupon', 'kupon.id', '=', 'history.id_kupon')
+                        ->where('history.id_unik', $param[0])
+                        ->count();
+                    if ($user == 0) {
+                        return response()->json($avaiable);
+                    } else {
+                        $error = [
+                            'status' => 'error',
+                            'message' => 'Kupon sudah pernah digunakan'
+                        ];
+                    }
                 } else {
                     $error = [
                         'status' => 'error',
-                        'message' => 'Kupon sudah pernah digunakan'
+                        'message' => 'Kupon sudah habis / Tidak berlaku'
                     ];
                 }
-            } else {
-                $error = [
-                    'status' => 'error',
-                    'message' => 'Kupon sudah habis / Tidak berlaku'
-                ];
             }
         }
 

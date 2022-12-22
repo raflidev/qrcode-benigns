@@ -14,6 +14,7 @@ class Kupon extends Model
     protected $fillable = [
         'benefit',
         'kodeunik',
+        'expired_at',
         'max_use',
     ];
 

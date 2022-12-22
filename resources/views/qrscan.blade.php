@@ -127,8 +127,10 @@
                     $('#benefit').text(data.benefit);
                     $('#email').val(param[1]);
                 }else{
-                    console.log(data)
+                    $('#resultTrue').addClass('hidden');
                     $('#resultMessage').removeClass('hidden');
+                    $('#resultMessage').removeClass('text-green-500');
+                    $('#resultMessage').addClass('text-red-500');
                     $('#resultMessageText').text(data.message);
                 }
             })

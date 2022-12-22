@@ -31,6 +31,10 @@
                         <input type="number" name="max_use" id="max_use" placeholder="Max Use" value="{{old('max_use')}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
                     </div>
                     <div>
+                        <label for="expired_at" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expired</label>
+                        <input type="date" name="expired_at" id="expired_at" placeholder="Expired" value="{{old('expired_at')}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                    </div>
+                    <div>
                         <label for="benefit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Benefit</label>
                         <textarea name="benefit" id="benefit"  value="{{old('benefit')}}" class="resize-none bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white " placeholder="Benefit" required></textarea>
                     </div>
