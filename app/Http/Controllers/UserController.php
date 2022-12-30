@@ -169,7 +169,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        $user->delete();
+        try {
+            $user->delete();
+        } catch (\Throwable $e) {
+            return redirect()->route('user.index')->with('error', 'User tidak boleh dihapus, Masih ada transaksi yang terkait dengan user');
+        }
         return redirect()->route('user.index')->with('success', 'User berhasil dihapus');
     }
 

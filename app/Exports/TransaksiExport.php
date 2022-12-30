@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Transaksi;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -22,6 +23,7 @@ class TransaksiExport implements FromCollection, WithHeadings
             'history.jenis_mitra',
             'history.nama_user',
             'history.no_hp',
+            'kupon.expired_at',
             'history.created_at',
             'history.updated_at',
         )
@@ -41,6 +43,7 @@ class TransaksiExport implements FromCollection, WithHeadings
             'Jenis Mitra',
             'Nama Customer',
             'No HP',
+            'Expired',
             'Dibuat pada',
             'Terakhir Update',
         ];

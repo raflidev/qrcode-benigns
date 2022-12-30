@@ -13,10 +13,23 @@
     <x-sidebar activePage="users"/>
     <div class="content p-7 flex flex-col gap-8 ml-64 2xl:ml-80 2xl:gap-12 dark:bg-accent min-h-[calc(100vh-48px)] 2xl:min-h-[calc(100vh-56px)]  " >
         @if (count($errors) > 0)
-            <div class="w-full bg-red-500 text-white py-2 px-5 rounded-xl">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
+        <div class="w-full bg-red-500 text-white py-2 px-5 rounded-xl">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </div>
+        @endif
+        @if (Session::has('error'))
+            <div
+                class="error w-full px-5 bg-red-500 text-white py-3 rounded items-center">
+                {{ Session::get('error') }}
+                <div class="float-right" onclick="closePopup()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor"
+                        class="w-6 h-6  hover:rounded-full text-white hover:bg-green-800 hover:cursor-pointer">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </div>
             </div>
         @endif
         @if (Session::has('success'))
